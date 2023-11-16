@@ -1,0 +1,3 @@
+[toolchain]
+targets = ["aarch64-unknown-uefi", "i686-unknown-ueif", "x86_64-unknown-uefi"]
+
