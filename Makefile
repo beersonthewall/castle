@@ -1,6 +1,6 @@
 .PHONY: all kernel clean check bootloader
 
-all: bootloader
+all: bootloader kernel
 	@mkdir -p target/esp/efi/boot/
 	@cp target/x86_64-unknown-uefi/debug/bootloader.efi \
 	target/esp/efi/boot/bootx64.efi
@@ -11,6 +11,9 @@ all: bootloader
 
 bootloader:
 	@cargo b -p bootloader --target x86_64-unknown-uefi
+
+kernel:
+	@cargo b -p kernel --target x86_64-unknown-none
 
 check:
 	@cargo check
