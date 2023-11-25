@@ -1,8 +1,8 @@
-.PHONY: all bootloader kernel clean check
+.PHONY: all kernel clean check bootloader
 
-all: bootloader kernel
+all: bootloader
 	@mkdir -p target/esp/efi/boot/
-	@cp bootloader/target/x86_64-unknown-uefi/debug/kernel.efi \
+	@cp target/x86_64-unknown-uefi/debug/bootloader.efi \
 	target/esp/efi/boot/bootx64.efi
 	@qemu-system-x86_64 -enable-kvm \
 	-drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
@@ -11,9 +11,6 @@ all: bootloader kernel
 
 bootloader:
 	@cargo b -p bootloader --target x86_64-unknown-uefi
-
-kernel:
-	@cargo b -p kernel
 
 check:
 	@cargo check
